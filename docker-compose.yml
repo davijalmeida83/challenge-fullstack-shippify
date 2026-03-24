@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - sqlite_data:/data
+    environment:
+      - DB_PATH=/data/database.sqlite
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  sqlite_data:
